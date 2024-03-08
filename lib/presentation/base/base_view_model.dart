@@ -9,3 +9,4 @@ abstract class BaseViewModelInput{
 abstract class BaseViewModelOutput{
 // will be implemented later
 }
+ 
