@@ -54,7 +54,7 @@ ThemeData getAppTheme() {
           color: ColorManager.darkGray, fontSize: FontSize.s16), //head line 1
       titleMedium: getRegularStyle(
           color: ColorManager.darkGray, fontSize: FontSize.s14), //sup title 1
-      labelLarge:getMediumStyle(color: ColorManager.primary,fontSize: FontSize.s16),//button
+      labelLarge:getMediumStyle(color: ColorManager.primary,fontSize: FontSize.s12),//button
       bodyLarge: getRegularStyle(color: ColorManager.grey1), //caption
       bodySmall: getRegularStyle(color: ColorManager.gray), //bodyText1
     ),
@@ -81,7 +81,7 @@ ThemeData getAppTheme() {
       // enabled border
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: ColorManager.primary,
+          color: ColorManager.gray,
           width: AppSize.s1_5,
         ),
         borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
@@ -90,7 +90,7 @@ ThemeData getAppTheme() {
       // focused border
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: ColorManager.gray,
+          color: ColorManager.primary,
           width: AppSize.s1_5,
         ),
         borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),

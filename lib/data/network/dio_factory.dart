@@ -1,3 +1,4 @@
+import 'package:clean_architecture/app/app_prefs.dart';
 import 'package:clean_architecture/app/constants.dart';
 import 'package:clean_architecture/presentation/resources/constants_manager.dart';
 import 'package:dio/dio.dart';
@@ -12,15 +13,18 @@ const String AUTHORIZATION = "authorization";
 const String DEFAULT_LANGUAGE = "language";
 
 class DioFactory {
+  final AppPreference _appPreference;
+  DioFactory(this._appPreference);
+
   Future<Dio> getDio() async {
     Dio dio = Dio();
-
+    String language =await _appPreference.getAppLang();
     Duration timeout = const Duration(seconds: Constants.apiTimeOut);
     Map<String, String> headers = {
       CONTENT_TYPE: APPLICATION_JSON,
       ACCEPT: APPLICATION_JSON,
       AUTHORIZATION:Constants.token,
-      DEFAULT_LANGUAGE: 'en', // todo get language from app prefs
+      DEFAULT_LANGUAGE: language,
     };
     dio.options = BaseOptions(
         baseUrl: Constants.baseUrl,
@@ -30,13 +34,14 @@ class DioFactory {
 
     if(!kReleaseMode)
       {
-        dio.interceptors.add(PrettyDioLogger(
+        dio.interceptors.add(
+            PrettyDioLogger(
           requestHeader : true,
           requestBody :true,
           responseHeader : true,
         ));
       }
-      
+
     return dio;
   }
 }

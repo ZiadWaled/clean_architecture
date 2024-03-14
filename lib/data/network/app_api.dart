@@ -7,10 +7,9 @@ part 'app_api.g.dart';
 @RestApi(baseUrl: Constants.baseUrl)
 abstract class AppServiceClint {
   factory AppServiceClint(Dio dio, {String? baseUrl}) = _AppServiceClint;
-
   @POST("/customers/login")
-Future<AuthenticationResponse> login(
-      @Field("email")String email ,
-      @Field("password")String password ,
-      );
+  Future<AuthenticationResponse> login(
+    @Field("email") String email,
+    @Field("password") String password,
+  );
 }

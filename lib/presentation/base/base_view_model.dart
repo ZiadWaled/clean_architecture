@@ -6,6 +6,7 @@ abstract class BaseViewModelInput{
 
   void dispose(); // will be call when view model dies
 }
+
 abstract class BaseViewModelOutput{
 // will be implemented later
 }

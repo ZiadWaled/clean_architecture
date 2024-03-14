@@ -5,11 +5,14 @@ import 'package:clean_architecture/presentation/base/base_view_model.dart';
 import 'package:clean_architecture/presentation/resources/assets_manager.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 
-class OnBoardingViewModel implements BaseViewModel, OnBoardingViewModelInput, OnBoardingViewModelOutput {
+class OnBoardingViewModel
+    implements
+        BaseViewModel,
+        OnBoardingViewModelInput,
+        OnBoardingViewModelOutput {
   // stream controllers output
   final StreamController _streamController =
       StreamController<SliderViewObject>();
-
   late final List<SliderObject> _list;
   int _currentIndex = 0;
 
@@ -51,22 +54,22 @@ class OnBoardingViewModel implements BaseViewModel, OnBoardingViewModelInput, On
   }
 
   @override
-  // TODO: implement inputSliderViewObject
   Sink get inputSliderViewObject => _streamController.sink;
 
   // onboarding ViewModel outputs
   @override
-  // TODO: implement outputSliderViewObject
   Stream<SliderViewObject> get outputSliderViewObject =>
       _streamController.stream.map((sliderViewObject) => sliderViewObject);
 
   // onboarding private functions
 
   void _postDataToView() {
-    inputSliderViewObject.add(SliderViewObject(
-        sliderObject: _list[_currentIndex],
-        currentIndex: _currentIndex,
-        numOfSlides: _list.length));
+    _streamController.sink.add(
+      SliderViewObject(
+          sliderObject: _list[_currentIndex],
+          currentIndex: _currentIndex,
+          numOfSlides: _list.length),
+    );
   }
 
   List<SliderObject> _getSliderDate() => [

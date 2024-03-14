@@ -15,18 +15,17 @@ extension ContactsResponseMapper on ContactsResponse? {
 extension CustomerResponseMapper on CustomerResponse? {
   Customer toDomain() {
     return Customer(
-        id: this?.id.orEmpty() ?? Constants.empty,
+        id: this?.id ?? Constants.empty,
         name: this?.name.orEmpty() ?? Constants.empty,
         numOfNotifications:
-            this?.numOfNotifications.orZero() ?? Constants.zero);
+        this?.numOfNotifications.orZero() ?? Constants.zero
+    );
   }
 }
 extension AuthenticationResponseMapper on AuthenticationResponse? {
   Authentication toDomain() {
     return Authentication(
         contacts: this?.contacts.toDomain(),
-        customer: this?.customer.toDomain()
-    );
-
+        customer: this?.customer.toDomain() );
   }
 }

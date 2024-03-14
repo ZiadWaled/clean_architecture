@@ -10,7 +10,8 @@ class ImageAssets{
   static const String rightArrowIc = "$imagePath/right_arrow_ic.svg";
   static const String leftArrowIc = "$imagePath/left_arrow_ic.svg";
   static const String hollowCirlceIc = "$imagePath/hollow_cirlce_ic.svg";
-}// class OnBoardingPage extends StatelessWidget {
+}
+// class OnBoardingPage extends StatelessWidget {
 //   OnBoardingPage({super.key});
 //   OnBoardingModel? onBoardingModel;
 //

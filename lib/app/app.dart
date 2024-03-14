@@ -2,7 +2,7 @@
 import 'package:clean_architecture/presentation/resources/routes_manager.dart';
 import 'package:clean_architecture/presentation/resources/theme_manager.dart';
 import 'package:flutter/material.dart';
-
+@immutable
 class MyApp extends StatelessWidget {
   MyApp._internal(); // named constructor
 
