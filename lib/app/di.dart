@@ -7,7 +7,9 @@ import 'package:clean_architecture/data/repository/repository_impl.dart';
 import 'package:clean_architecture/domain/repository/repository.dart';
 import 'package:clean_architecture/domain/usecase/base_usecase.dart';
 import 'package:clean_architecture/domain/usecase/login_usecase.dart';
+import 'package:clean_architecture/domain/usecase/register_usecase.dart';
 import 'package:clean_architecture/presentation/login/viewmodel/login_viewmodel.dart';
+import 'package:clean_architecture/presentation/register/cubit/register_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -28,7 +30,7 @@ Future<void> initAppModule() async {
       () => NetworkInfoImpl(InternetConnectionChecker()));
 
   // dio factory
-  instance.registerLazySingleton<DioFactory>(() => DioFactory(instance()));
+  instance.registerLazySingleton<DioFactory>(() =>DioFactory(instance()) );
 
   Dio dio = await instance<DioFactory>().getDio();
   // app Service Clint
@@ -51,5 +53,23 @@ initLoginModule() {
     instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
     // login view model
     instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
+
   }
+
+
+}
+
+
+// Register
+
+initRegisterModule() {
+  // login module, its a module where we put all generic dependencies
+
+
+  // use case model
+  instance.registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
+  // Register cubit
+  instance.registerFactory<RegesterCubit>(() => RegesterCubit(instance()));
+
+
 }

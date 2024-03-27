@@ -49,18 +49,37 @@ class ContactsResponse {
 }
 
 @JsonSerializable()
-  class AuthenticationResponse extends BaseResponse {
-    @JsonKey(name: "customer")
-    CustomerResponse? customer;
-    @JsonKey(name: "contacts")
-    ContactsResponse? contacts;
+class AuthenticationResponse extends BaseResponse {
+  @JsonKey(name: "customer")
+  CustomerResponse? customer;
+  @JsonKey(name: "contacts")
+  ContactsResponse? contacts;
 
-    AuthenticationResponse(this.customer, this.contacts);
+  AuthenticationResponse(this.customer, this.contacts);
 
-    // from json
-    factory AuthenticationResponse.fromJson(Map<String, dynamic> json) =>
-        _$AuthenticationResponseFromJson(json);
+  // from json
+  factory AuthenticationResponse.fromJson(Map<String, dynamic> json) =>
+      _$AuthenticationResponseFromJson(json);
 
-    // to json
-    Map<String, dynamic> toJson() => _$AuthenticationResponseToJson(this);
-  }
+  // to json
+  Map<String, dynamic> toJson() => _$AuthenticationResponseToJson(this);
+}
+
+
+
+@JsonSerializable()
+class SignUpResponse extends BaseResponse {
+  String name;
+  String phone;
+  String email;
+  String password;
+
+  SignUpResponse(this.name, this.phone, this.email, this.password);
+
+  // toJson
+  Map<String, dynamic> toJson() => _$SignUpResponseToJson(this);
+
+//fromJson
+  factory SignUpResponse.fromJson(Map<String, dynamic> json) =>
+      _$SignUpResponseFromJson(json);
+}

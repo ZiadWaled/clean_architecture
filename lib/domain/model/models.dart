@@ -40,3 +40,12 @@ class Authentication {
 
   Authentication({required this.customer, required this.contacts});
 }
+
+class SignUp {
+  String name;
+  String phone;
+  String email;
+  String password;
+
+  SignUp(this.name, this.phone, this.email, this.password);
+}

@@ -1,12 +1,13 @@
 import 'package:clean_architecture/app/di.dart';
 import 'package:clean_architecture/presentation/login/viewmodel/login_viewmodel.dart';
+import 'package:clean_architecture/presentation/resources/app_router.dart';
 import 'package:clean_architecture/presentation/resources/assets_manager.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/routes_manager.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 import 'package:clean_architecture/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -16,7 +17,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginViewModel _viewModel =instance<LoginViewModel>();
+  final LoginViewModel _viewModel = instance<LoginViewModel>();
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -51,8 +52,7 @@ class _LoginViewState extends State<LoginView> {
       backgroundColor: ColorManager.white,
       body: Container(
         padding: const EdgeInsets.only(
-
-        top: AppPadding.p90,
+          top: AppPadding.p90,
         ),
         color: ColorManager.white,
         child: SingleChildScrollView(
@@ -74,11 +74,12 @@ class _LoginViewState extends State<LoginView> {
                           keyboardType: TextInputType.emailAddress,
                           controller: _userNameController,
                           decoration: InputDecoration(
-                              hintText: AppStrings.userName,
-                              labelText: AppStrings.userName,
-                              errorText: (snapshot.data ?? true)
-                                  ? null
-                                  : AppStrings.userNameError),
+                            hintText: AppStrings.userName,
+                            labelText: AppStrings.userName,
+                            errorText: (snapshot.data ?? true)
+                                ? null
+                                : AppStrings.userNameError,
+                          ),
                         );
                       }),
                 ),
@@ -95,11 +96,12 @@ class _LoginViewState extends State<LoginView> {
                           keyboardType: TextInputType.visiblePassword,
                           controller: _passwordController,
                           decoration: InputDecoration(
-                              hintText: AppStrings.password,
-                              labelText: AppStrings.password,
-                              errorText: (snapshot.data ?? true)
-                                  ? null
-                                  : AppStrings.passwordError),
+                            hintText: AppStrings.password,
+                            labelText: AppStrings.password,
+                            errorText: (snapshot.data ?? true)
+                                ? null
+                                : AppStrings.passwordError,
+                          ),
                         );
                       }),
                 ),
@@ -108,9 +110,9 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.only(
-                    left: AppPadding.p28 ,
-                    right:  AppPadding.p28,
+                  padding: const EdgeInsets.only(
+                    left: AppPadding.p28,
+                    right: AppPadding.p28,
                   ),
                   child: StreamBuilder<bool>(
                     stream: _viewModel.outAreAllInputsValid,
@@ -136,18 +138,20 @@ class _LoginViewState extends State<LoginView> {
                       children: [
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(
-                                context, Routes.forgotPasswordRoute);
+                            GoRouter.of(context).push(AppRouter.kForgotPasswordView);
+
                           },
-                          child: Text(AppStrings.forgetPassword,
+                          child: Text(
+                            AppStrings.forgetPassword,
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, Routes.registerRoute);
+                            GoRouter.of(context).push(AppRouter.kRegisterView);
                           },
-                          child: Text(AppStrings.registerText,
+                          child: Text(
+                            AppStrings.registerText,
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                         )

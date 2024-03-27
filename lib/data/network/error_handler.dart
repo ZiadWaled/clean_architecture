@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:clean_architecture/data/network/error_handler.dart';
 import 'package:clean_architecture/data/network/error_handler.dart';
 import 'package:clean_architecture/data/network/failure.dart';

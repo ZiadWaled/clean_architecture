@@ -1,5 +1,6 @@
 
 const String imagePath = "assets/images";
+const String jsonPath = "assets/json";
 class ImageAssets{
   static const String splashLogo = "$imagePath/splash_logo.png";
   static const String onboardingLogo1 = "$imagePath/onboarding_logo1.svg";
@@ -11,39 +12,10 @@ class ImageAssets{
   static const String leftArrowIc = "$imagePath/left_arrow_ic.svg";
   static const String hollowCirlceIc = "$imagePath/hollow_cirlce_ic.svg";
 }
-// class OnBoardingPage extends StatelessWidget {
-//   OnBoardingPage({super.key});
-//   OnBoardingModel? onBoardingModel;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       mainAxisAlignment: MainAxisAlignment.start,
-//       children: [
-//         const SizedBox(height: AppSize.s14),
-//         Padding(
-//           padding: const EdgeInsets.all(AppPadding.p8),
-//           child: Text(
-//             onBoardingModel!.title!,
-//             style: Theme.of(context).textTheme.headlineLarge,
-//             maxLines: AppConstants.onBoardingMaxLien,
-//             overflow: TextOverflow.clip,
-//           ),
-//         ),
-//         const SizedBox(height: AppSize.s4),
-//         Padding(
-//           padding: const EdgeInsets.all(AppPadding.p8),
-//           child: Text(
-//             onBoardingModel!.supTitle!,
-//             style: Theme.of(context).textTheme.titleMedium,
-//             maxLines: AppConstants.onBoardingMaxLien,
-//             textAlign: TextAlign.center,
-//             overflow: TextOverflow.clip,
-//           ),
-//         ),
-//         const SizedBox(height: AppSize.s4),
-//         SvgPicture.asset(onBoardingModel!.image!)
-//       ],
-//     );
-//   }
-// }
+class JsonAssets {
+  static const String empty = "$jsonPath/empty.json";
+  static const String error = "$jsonPath/error.json";
+  static const String loading = "$jsonPath/loading.json";
+  static const String success = "$jsonPath/success.json";
+
+}

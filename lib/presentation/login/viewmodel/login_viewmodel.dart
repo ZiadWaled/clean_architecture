@@ -57,14 +57,14 @@ class LoginViewModel
   @override
   setUserName(String userName) {
     inputUserName.add(userName);
-    loginObject = loginObject.copyWith(username: userName);
+    loginObject = loginObject.copyWith(userName: userName);
     inputAreAllInputsValid.add(null);
   }
 
   @override
   login() async {
     (await _loginUseCase.execute(
-            LoginUseCaseInput(loginObject.username, loginObject.password)))
+            LoginUseCaseInput(loginObject.userName, loginObject.password)))
         .fold((failure) => {print(failure.massage)},
             (data) => {print(data.customer?.name)});
   }
@@ -93,7 +93,7 @@ class LoginViewModel
 
   bool _areAllInputsValid() {
     return _isPasswordValid(loginObject.password) &&
-        _isUserNameValid(loginObject.username);
+        _isUserNameValid(loginObject.userName);
   }
 }
 

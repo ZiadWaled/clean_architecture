@@ -42,4 +42,32 @@ class RepositoryImpl implements Repository {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, SignUp>> signUp(RegisterRequest signUpRequest)async {
+    if (await _networkInfo.isConnected) {
+      // internet not connection , call API
+      try {
+        final response = await _remoteDataSource.signUp(signUpRequest);
+
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          //success
+          // Either right
+          //return data
+
+          return Right(response.toDomain());
+        } else {
+          // failure - business error
+          // Either left
+          return Left(
+              Failure(ApiInternalStatus.FAILURE, ResponseMessage.DEFAULT));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // internet not connection
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }

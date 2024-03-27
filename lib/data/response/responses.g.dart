@@ -65,3 +65,23 @@ Map<String, dynamic> _$AuthenticationResponseToJson(
       'customer': instance.customer,
       'contacts': instance.contacts,
     };
+
+SignUpResponse _$SignUpResponseFromJson(Map<String, dynamic> json) =>
+    SignUpResponse(
+      json['name'] as String,
+      json['phone'] as String,
+      json['email'] as String,
+      json['password'] as String,
+    )
+      ..status = json['status'] as int?
+      ..message = json['message'] as String?;
+
+Map<String, dynamic> _$SignUpResponseToJson(SignUpResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+      'name': instance.name,
+      'phone': instance.phone,
+      'email': instance.email,
+      'password': instance.password,
+    };

@@ -1,5 +1,6 @@
 import 'package:clean_architecture/domain/model/models.dart';
 import 'package:clean_architecture/presentation/onboarding/viewmodel/onboarding_viewmodel.dart';
+import 'package:clean_architecture/presentation/resources/app_router.dart';
 import 'package:clean_architecture/presentation/resources/assets_manager.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/constants_manager.dart';
@@ -9,6 +10,8 @@ import 'package:clean_architecture/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({super.key});
@@ -76,7 +79,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                    GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
                   },
                   child: Text(
                     AppStrings.skip,

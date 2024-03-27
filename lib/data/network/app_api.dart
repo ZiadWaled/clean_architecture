@@ -12,4 +12,12 @@ abstract class AppServiceClint {
     @Field("email") String email,
     @Field("password") String password,
   );
+
+  @POST("/customer/signUp")
+  Future<SignUpResponse> signUp(
+    @Field("name") String name,
+    @Field("phone") String phone,
+    @Field("email") String email,
+    @Field("password") String password,
+  );
 }
