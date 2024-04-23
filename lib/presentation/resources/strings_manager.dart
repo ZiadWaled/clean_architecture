@@ -27,4 +27,8 @@ class AppStrings {
   static const loading = "Loading...";
   static const retryAgain = "Retry Again";
   static const ok = "OK";
+  static const home = "Home";
+  static const search = "Search";
+  static const notifications = "Notifications";
+  static const settings = "Settings";
 }

@@ -13,7 +13,7 @@ class OnBoardingViewModel
   // stream controllers output
   final StreamController _streamController =
       StreamController<SliderViewObject>();
-  late final List<SliderObject> _list;
+  late final List<SliderObject> slidesList;
   int _currentIndex = 0;
 
   // onboarding ViewModel Inputs
@@ -25,14 +25,14 @@ class OnBoardingViewModel
   @override
   void start() {
     // view model start user jop
-    _list = _getSliderDate();
+    slidesList = _getSliderDate();
     _postDataToView();
   }
 
   @override
   int goNext() {
     int nextIndex = ++_currentIndex;
-    if (nextIndex == _list.length) {
+    if (nextIndex == slidesList.length) {
       nextIndex = 0;
     }
     return nextIndex;
@@ -42,7 +42,7 @@ class OnBoardingViewModel
   int goPrevious() {
     int previousIndex = --_currentIndex;
     if (previousIndex == -1) {
-      previousIndex = _list.length - 1;
+      previousIndex = slidesList.length - 1;
     }
     return previousIndex;
   }
@@ -66,9 +66,9 @@ class OnBoardingViewModel
   void _postDataToView() {
     _streamController.sink.add(
       SliderViewObject(
-          sliderObject: _list[_currentIndex],
+          sliderObject: slidesList[_currentIndex],
           currentIndex: _currentIndex,
-          numOfSlides: _list.length),
+          numOfSlides: slidesList.length),
     );
   }
 

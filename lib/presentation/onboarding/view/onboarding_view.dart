@@ -63,16 +63,17 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         ),
         body: PageView.builder(
             itemCount: sliderViewObject.numOfSlides,
+            // children: [],
             controller: _pageController,
             onPageChanged: (index) {
               _viewModel.onPageChanged(index);
             },
             itemBuilder: (BuildContext context, int index) {
-              return OnBoardingPage(sliderViewObject.sliderObject);
-            }),
+              return OnBoardingPage(_viewModel.slidesList[index]);
+            },),
         bottomSheet: Container(
           height: 100,
-          color: ColorManager.white,
+          color: Colors.transparent,
           child: Column(
             children: [
               Align(

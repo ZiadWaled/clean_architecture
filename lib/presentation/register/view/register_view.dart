@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../cubit/register_states.dart';
+
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
 
@@ -16,12 +18,10 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  late RegesterCubit registerCubit;
 
   @override
   void initState() {
     super.initState();
-    registerCubit = instance<RegesterCubit>();
   }
 
   @override
@@ -34,143 +34,138 @@ class _RegisterViewState extends State<RegisterView> {
         iconTheme: IconThemeData(color: ColorManager.primary),
       ),
       body: BlocProvider(
-        create: (context) => registerCubit,
-        child: Container(
-          padding: const EdgeInsets.only(top: AppPadding.p8),
-          child: SingleChildScrollView(
-            child: Form(
-              key: registerCubit.formKey,
-              autovalidateMode: AutovalidateMode.always,
-              child: Column(
-                children: [
-                  const Center(
-                    child: Image(image: AssetImage(ImageAssets.splashLogo)),
-                  ),
-                  const SizedBox(
-                    height: AppSize.s20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: AppPadding.p28,
-                      right: AppPadding.p28,
-                    ),
-                    child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: registerCubit.userNameEditingController,
-                      decoration: const InputDecoration(
-                        hintText: AppStrings.userName,
-                        labelText: AppStrings.userName,
+        create: (context) => RegesterCubit(instance()),
+        child: BlocBuilder<RegesterCubit, RegesterStates>(
+          builder: (context, state){
+            final registerCubit = BlocProvider.of<RegesterCubit>(context);
+            return Container(
+              padding: const EdgeInsets.only(top: AppPadding.p8),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: registerCubit.formKey,
+                  // auto validate Mode: Auto validate Mode.always,
+                  child: Column(
+                    children: [
+                      const Center(
+                        child: Image(image: AssetImage(ImageAssets.splashLogo)),
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return registerCubit.userNameError;
-                        }
-                      },
-                    ),
-                  ),
-                  const SizedBox(
-                    height: AppSize.s18,
-                  ),
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: AppPadding.p28,
-                        right: AppPadding.p28,
+                      const SizedBox(
+                        height: AppSize.s20,
                       ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 4,
-                            child: TextFormField(
-                              keyboardType: TextInputType.phone,
-                              controller: registerCubit.phoneEditingController,
-                              decoration: const InputDecoration(
-                                hintText: AppStrings.phone,
-                                labelText: AppStrings.phone,
-                              ),
-
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return registerCubit.phoneError;
-                                }
-                              },
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: AppPadding.p28,
+                          right: AppPadding.p28,
+                        ),
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          controller: registerCubit.userNameEditingController,
+                          textInputAction: TextInputAction.next,
+                          decoration: const InputDecoration(
+                            hintText: AppStrings.userName,
+                            labelText: AppStrings.userName,
                           ),
-                        ],
+                          validator:registerCubit.validateEmail,
+                        ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: AppSize.s18,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: AppPadding.p28,
-                      right: AppPadding.p28,
-                    ),
-                    child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: registerCubit.emailEditingController,
-                      decoration: const InputDecoration(
-                        hintText: AppStrings.email,
-                        labelText: AppStrings.email,
+                      const SizedBox(
+                        height: AppSize.s18,
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return registerCubit.emailError;
-                        }
-                      },
-                  ),),
-                  const SizedBox(
-                    height: AppSize.s18,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: AppPadding.p28,
-                      right: AppPadding.p28,
-                    ),
-                    child: TextFormField(
-                      keyboardType: TextInputType.visiblePassword,
-                      controller: registerCubit.passwordEditingController,
-                      decoration: const InputDecoration(
-                        hintText: AppStrings.password,
-                        labelText: AppStrings.password,
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: AppPadding.p28,
+                            right: AppPadding.p28,
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 4,
+                                child: TextFormField(
+                                  keyboardType: TextInputType.phone,
+                                  controller: registerCubit.phoneEditingController,
+                                  decoration: const InputDecoration(
+                                    hintText: AppStrings.phone,
+                                    labelText: AppStrings.phone,
+                                  ),
+
+                                  validator: registerCubit.validatePhoneNumber,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      validator: (value) => registerCubit.validator(
-                          value, registerCubit.passwordError),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: AppSize.s18,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: AppPadding.p28,
-                      right: AppPadding.p28,
-                    ),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: AppSize.s40,
-                      child: ElevatedButton(
-                        // onPressed:  registerCubit.areAllInputsValid() ?? false
-                        //     ? () {
-                        //   registerCubit.register();
-                        // }
-                        //     : null,
-                        onPressed: () {
-                          registerCubit.register();
-                        },
-                        child: const Text(AppStrings.password),
+                      const SizedBox(
+                        height: AppSize.s18,
                       ),
-                    ),
+
+                      //Reqular Expression to check email
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: AppPadding.p28,
+                          right: AppPadding.p28,
+                        ),
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          controller: registerCubit.emailEditingController,
+                          decoration: const InputDecoration(
+                            hintText: AppStrings.email,
+                            labelText: AppStrings.email,
+                          ),
+                          validator: registerCubit.validateEmail,
+                        ),),
+                      const SizedBox(
+                        height: AppSize.s18,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: AppPadding.p28,
+                          right: AppPadding.p28,
+                        ),
+                        child: TextFormField(
+                          keyboardType: TextInputType.visiblePassword,
+                          controller: registerCubit.passwordEditingController,
+                          decoration: const InputDecoration(
+                            hintText: AppStrings.password,
+                            labelText: AppStrings.password,
+                          ),
+                          validator: registerCubit.validatePassword,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: AppSize.s18,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: AppPadding.p28,
+                          right: AppPadding.p28,
+                        ),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: AppSize.s40,
+                          child: ElevatedButton(
+                            // onPressed:  registerCubit.areAllInputsValid() ?? false
+                            //     ? () {
+                            //   registerCubit.register();
+                            // }
+                            //     : null,
+                            onPressed: () {
+                              registerCubit.register(context);
+                            },
+                            child: const Text(AppStrings.password),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: AppSize.s18,
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: AppSize.s18,
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

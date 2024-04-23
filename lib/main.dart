@@ -7,3 +7,5 @@ Future<void> main() async {
   await initAppModule();
   runApp(MyApp());
 }
+// Inputs Validation in Register View & Register Use Case
+// Home Screen -> Get Products Using Cubit & Use Case

@@ -1,11 +1,11 @@
-import 'package:clean_architecture/domain/repository/repository.dart';
-import 'package:clean_architecture/domain/usecase/login_usecase.dart';
 import 'package:clean_architecture/domain/usecase/register_usecase.dart';
 import 'package:clean_architecture/presentation/common/freezed_data_classes.dart';
 import 'package:clean_architecture/presentation/register/cubit/register_states.dart';
+import 'package:clean_architecture/presentation/resources/app_router.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class RegesterCubit extends Cubit<RegesterStates> {
   RegesterCubit(this.registerUseCase) : super(AppInitialState());
@@ -25,8 +25,6 @@ class RegesterCubit extends Cubit<RegesterStates> {
 
   final RegisterUseCase registerUseCase;
   var registerObject = RegisterObject("", "", "", "");
-  bool _areInputsValid = false;
-
 
   setPassword(String password) {
     registerObject =
@@ -48,55 +46,55 @@ class RegesterCubit extends Cubit<RegesterStates> {
         registerObject.copyWith(phone: phoneEditingController.text.trim());
   }
 
-  register() async {
-    final userName = userNameEditingController.text.trim();
-    final email = emailEditingController.text.trim();
-    final password = passwordEditingController.text.trim();
-    final phone = phoneEditingController.text.trim();
+  register(BuildContext context) async {
+    // print("Register Object: $registerObject");
+    final registerUseCaseInput = RegisterUseCaseInput(
+        userNameEditingController.text.trim(),
+        phoneEditingController.text.trim(),
+        emailEditingController.text.trim(),
+        passwordEditingController.text.trim());
 
-    final registerObject = RegisterObject(userName, phone, email, password);
-
-    (await registerUseCase.execute(RegisterUseCaseInput(
-      registerObject.userName,
-      registerObject.phone,
-      registerObject.email,
-      registerObject.password,
-    )))
-        .fold(
+    (await registerUseCase.execute(registerUseCaseInput)).fold(
       (failure) => print(failure.massage),
       (data) => print(data.phone),
     );
+    if (formKey.currentState!.validate()) {
+      GoRouter.of(context).push(AppRouter.kMainView);
+    }
   }
 
-  String? validator(String? value, String? output) {
+  // validation Email
+
+  String? validateEmail(String? value) {
+    final emailPattern = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (value == null || value.isEmpty) {
-      return output;
+      return AppStrings.emailError;
+    }
+
+    return null;
+  }
+  // validation PhoneNumber
+
+  String? validatePhoneNumber(String? value) {
+    if (value == null || value.isEmpty) {
+      return AppStrings.phoneError;
+    }
+    return null;
+  }
+  // validation Password
+
+  String? validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return AppStrings.passwordError;
     }
     return null;
   }
 
-  // bool _isPasswordValid(String password) {
-  //   return password.isNotEmpty;
-  // }
-  //
-  // bool _isUserNameValid(String userName) {
-  //   return userName.isNotEmpty;
-  // }
-  //
-  // bool _isEmailValid(String email) {
-  //   return email.isNotEmpty;
-  // }
-  //
-  // bool _isPhoneValid(String phone) {
-  //   return phone.isNotEmpty;
-  // }
-  //
-  // bool areAllInputsValid() {
-  //
-  //   return _isPasswordValid(registerObject.password) &&
-  //       _isUserNameValid(registerObject.userName) &&
-  //       _isPhoneValid(registerObject.phone) &&
-  //       _isEmailValid(registerObject.email);
-  // }
-
+  // validation Username
+  String? validateUsername(String? value) {
+    if (value == null || value.isEmpty) {
+      return AppStrings.userNameError;
+    }
+    return null;
+  }
 }

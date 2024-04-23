@@ -65,11 +65,10 @@ initLoginModule() {
 initRegisterModule() {
   // login module, its a module where we put all generic dependencies
 
+  if (!GetIt.I.isRegistered<RegisterUseCase>()){
+// use case model
+instance.registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
 
-  // use case model
-  instance.registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
-  // Register cubit
-  instance.registerFactory<RegesterCubit>(() => RegesterCubit(instance()));
-
+  }
 
 }
