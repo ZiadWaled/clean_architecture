@@ -7,12 +7,15 @@ import 'package:flutter/material.dart';
 
 ThemeData getAppTheme() {
   return ThemeData(
+
     // main colors
     primaryColor: ColorManager.primary,
     primaryColorLight: ColorManager.lightPrimary,
     primaryColorDark: ColorManager.darkPrimary,
     disabledColor: ColorManager.grey1,
-    splashColor: ColorManager.lightPrimary, // ripple effect color
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    // splashColor: ColorManager.lightPrimary, // ripple effect color
     // card view theme
     cardTheme: CardTheme(
       color: ColorManager.white,
@@ -23,7 +26,7 @@ ThemeData getAppTheme() {
     // app bar theme
     appBarTheme: AppBarTheme(
         centerTitle: true,
-        color: ColorManager.white,
+        color: ColorManager.primary,
         elevation: AppSize.s0,
         shadowColor: ColorManager.lightPrimary,
         titleTextStyle: getRegularStyle(
@@ -50,6 +53,7 @@ ThemeData getAppTheme() {
 
     // text theme
     textTheme: TextTheme(
+
       headlineLarge: getSemiBoldStyle(
           color: ColorManager.darkGray, fontSize: FontSize.s16), //head line 1
       titleMedium: getRegularStyle(
@@ -59,6 +63,8 @@ ThemeData getAppTheme() {
       bodySmall: getRegularStyle(color: ColorManager.gray), //bodyText1
       titleSmall: getRegularStyle(
           color: ColorManager.white, fontSize: FontSize.s16), //bodyText1
+      labelSmall: getBoldStyle(
+          color: ColorManager.primary, fontSize: FontSize.s16), //bodyText1
     ),
 
     // input decoration theme (text form field)

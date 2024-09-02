@@ -43,7 +43,9 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kMainView,
-        builder: (context, state) =>  MainView(),
+        builder: (context, state) {
+          initHomeModule();
+          return MainView();},
       ),
     ],
   );

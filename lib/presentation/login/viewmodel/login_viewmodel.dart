@@ -65,7 +65,7 @@ class LoginViewModel
   login() async {
     (await _loginUseCase.execute(
             LoginUseCaseInput(loginObject.userName, loginObject.password)))
-        .fold((failure) => {print(failure.massage)},
+        .fold((failure) => {print(failure.message)},
             (data) => {print(data.customer?.name)});
   }
 

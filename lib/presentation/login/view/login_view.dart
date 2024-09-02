@@ -122,7 +122,10 @@ class _LoginViewState extends State<LoginView> {
                           onPressed: snapshot.data ?? false
                               ? () {
                                   _viewModel.login();
-                                }
+                                  GoRouter.of(context).pushReplacement(AppRouter.kMainView);
+
+
+                          }
                               : null,
                           child: const Text(AppStrings.login));
                     },

@@ -45,22 +45,24 @@ class RegesterCubit extends Cubit<RegesterStates> {
     registerObject =
         registerObject.copyWith(phone: phoneEditingController.text.trim());
   }
-
+// register button
   register(BuildContext context) async {
     // print("Register Object: $registerObject");
     final registerUseCaseInput = RegisterUseCaseInput(
-        userNameEditingController.text.trim(),
-        phoneEditingController.text.trim(),
-        emailEditingController.text.trim(),
-        passwordEditingController.text.trim());
+        registerObject.userName,
+        registerObject.phone,
+        registerObject.email,
+        registerObject.password,
+    );
 
     (await registerUseCase.execute(registerUseCaseInput)).fold(
-      (failure) => print(failure.massage),
+      (failure) => print(failure.message),
       (data) => print(data.phone),
     );
     if (formKey.currentState!.validate()) {
       GoRouter.of(context).push(AppRouter.kMainView);
     }
+    return;
   }
 
   // validation Email

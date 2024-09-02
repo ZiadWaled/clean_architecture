@@ -85,10 +85,7 @@ class OnBoardingViewModel
             supTitle: AppStrings.onBoardingSubTitle3,
             title: AppStrings.onBoardingTitle3,
             image: ImageAssets.onboardingLogo3),
-        SliderObject(
-            supTitle: AppStrings.onBoardingSubTitle4,
-            title: AppStrings.onBoardingTitle4,
-            image: ImageAssets.onboardingLogo4),
+
       ];
 }
 

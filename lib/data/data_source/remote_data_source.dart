@@ -5,6 +5,7 @@ import 'package:clean_architecture/data/response/responses.dart';
 abstract class RemoteDataSource {
   Future<AuthenticationResponse> login(LoginRequest loginRequest);
   Future<SignUpResponse> signUp(RegisterRequest signUpRequest);
+  Future<HomeResponse> getHomeData();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -27,5 +28,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       signUpRequest.email,
       signUpRequest.password,
     );
+  }
+
+  @override
+  Future<HomeResponse> getHomeData() async {
+     return await _appServiceClient.getHomeData();
   }
 }

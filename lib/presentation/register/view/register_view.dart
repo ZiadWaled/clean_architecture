@@ -84,7 +84,11 @@ class _RegisterViewState extends State<RegisterView> {
                                 child: TextFormField(
                                   keyboardType: TextInputType.phone,
                                   controller: registerCubit.phoneEditingController,
-                                  decoration: const InputDecoration(
+                                  onChanged: (value) {
+
+                                    registerCubit.setPhone(value); // Update the password in the registerObject
+
+                                  },                                  decoration: const InputDecoration(
                                     hintText: AppStrings.phone,
                                     labelText: AppStrings.phone,
                                   ),
@@ -109,6 +113,11 @@ class _RegisterViewState extends State<RegisterView> {
                         child: TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           controller: registerCubit.emailEditingController,
+                          onChanged: (value) {
+
+                            registerCubit.setEmail(value); // Update the password in the registerObject
+
+                          },
                           decoration: const InputDecoration(
                             hintText: AppStrings.email,
                             labelText: AppStrings.email,
@@ -126,6 +135,11 @@ class _RegisterViewState extends State<RegisterView> {
                         child: TextFormField(
                           keyboardType: TextInputType.visiblePassword,
                           controller: registerCubit.passwordEditingController,
+                          onChanged: (value) {
+
+                            registerCubit.setPassword(value); // Update the password in the registerObject
+
+                          },
                           decoration: const InputDecoration(
                             hintText: AppStrings.password,
                             labelText: AppStrings.password,

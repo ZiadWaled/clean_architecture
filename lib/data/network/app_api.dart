@@ -12,7 +12,6 @@ abstract class AppServiceClint {
     @Field("email") String email,
     @Field("password") String password,
   );
-
   @POST("/customer/signUp")
   Future<SignUpResponse> signUp(
     @Field("name") String name,
@@ -20,4 +19,6 @@ abstract class AppServiceClint {
     @Field("email") String email,
     @Field("password") String password,
   );
+  @GET("/home")
+  Future<HomeResponse> getHomeData();
 }

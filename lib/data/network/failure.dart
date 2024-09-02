@@ -1,6 +1,6 @@
 class Failure {
   int code;
-  String massage;
+  String message;
 
-  Failure(this.code,  this.massage);
+  Failure(this.code,  this.message);
 }

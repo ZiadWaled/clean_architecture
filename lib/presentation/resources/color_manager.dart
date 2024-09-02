@@ -16,3 +16,4 @@ class ColorManager {
   static Color black = const Color(0xff000000);
   static Color error = const Color(0xffe61f34); // red color
 }
+

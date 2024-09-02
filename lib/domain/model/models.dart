@@ -49,3 +49,44 @@ class SignUp {
 
   SignUp(this.name, this.phone, this.email, this.password);
 }
+
+class Stores {
+  String id;
+  String title;
+  String image;
+
+  Stores(this.id, this.title, this.image);
+}
+
+class Banners {
+  String id;
+  String title;
+  String image;
+  String link;
+
+  Banners(this.id, this.title, this.image, this.link);
+}
+
+class Service {
+  String id;
+  String title;
+  String image;
+
+  Service(this.id, this.title, this.image);
+}
+
+class HomeData {
+  List<Service> services;
+
+  List<Banners> banners;
+
+  List<Stores> stores;
+
+  HomeData(this.services, this.banners, this.stores);
+}
+
+class HomeObject {
+  HomeData? data;
+
+  HomeObject(this.data);
+}

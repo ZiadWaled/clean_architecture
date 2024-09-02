@@ -40,3 +40,65 @@ extension SignUpResponseMapper on SignUpResponse? {
     );
   }
 }
+
+extension ServiceResponceMapper on ServiceResponse? {
+  Service toDomain() {
+    return Service(
+      this?.id.orEmpty() ?? Constants.empty,
+      this?.title.orEmpty() ?? Constants.empty,
+      this?.image.orEmpty() ?? Constants.empty,
+    );
+  }
+}
+
+extension StoreResponceMapper on StoresResponse? {
+  Stores toDomain() {
+    return Stores(
+      this?.id.orEmpty() ?? Constants.empty,
+      this?.title.orEmpty() ?? Constants.empty,
+      this?.image.orEmpty() ?? Constants.empty,
+    );
+  }
+}
+
+extension BannerResponceMapper on BannersResponse? {
+  Banners toDomain() {
+    return Banners(
+      this?.id.orEmpty() ?? Constants.empty,
+      this?.title.orEmpty() ?? Constants.empty,
+      this?.image.orEmpty() ?? Constants.empty,
+      this?.link.orEmpty() ?? Constants.empty,
+    );
+  }
+}
+
+extension HomeResponseMapper on HomeResponse? {
+  HomeObject toDomain() {
+    List<Service> services = (this
+                ?.data
+                ?.services
+                ?.map((serviceResponse) => serviceResponse.toDomain()) ??
+            const Iterable.empty())
+        .cast<Service>()
+        .toList();
+
+    List<Banners> banners = (this
+                ?.data
+                ?.banners
+                ?.map((bannersResponse) => bannersResponse.toDomain()) ??
+            const Iterable.empty())
+        .cast<Banners>()
+        .toList();
+
+    List<Stores> stores = (this
+                ?.data
+                ?.stores
+                ?.map((storesResponse) => storesResponse.toDomain()) ??
+            const Iterable.empty())
+        .cast<Stores>()
+        .toList();
+
+    var data = HomeData(services, banners, stores);
+    return HomeObject(data);
+  }
+}
